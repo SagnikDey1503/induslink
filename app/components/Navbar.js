@@ -96,7 +96,13 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 text-white">
       <div className="absolute inset-0 bg-ink-950/60 backdrop-blur-xl border-b border-white/10" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-copper-500/55 to-transparent" />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-70"
+        style={{
+          background:
+            "linear-gradient(90deg, rgba(243,140,58,0.18), rgba(13,15,20,0) 28%, rgba(53,179,127,0.12) 72%, rgba(95,120,152,0.14))"
+        }}
+      />
 
       <div className="relative mx-auto flex w-full max-w-6xl items-center gap-4 px-4 py-3 sm:px-6">
         <Link href="/" className="flex items-center gap-3 flex-shrink-0" aria-label="IndusLink home">
@@ -111,7 +117,7 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex flex-1 justify-center">
-          <div className="flex items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1 shadow-soft">
+          <div className="flex items-center gap-1 rounded-full border border-white/12 bg-gradient-to-r from-white/10 via-white/5 to-white/10 p-1 shadow-soft">
             <Link href="/industries" className={navItemClass("/industries")}>
               Industries
             </Link>

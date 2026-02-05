@@ -76,7 +76,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-ink-950 text-white">
+    <section className="relative -mt-16 overflow-hidden bg-ink-950 text-white">
       {/* Background layers */}
       <div
         className="pointer-events-none absolute inset-0 opacity-90"
@@ -141,7 +141,7 @@ export default function Hero() {
         />
       </svg>
 
-      <div className="relative mx-auto flex min-h-[calc(100vh-4rem)] w-full max-w-6xl items-center px-6 py-16">
+      <div className="relative mx-auto flex min-h-[100dvh] w-full max-w-6xl items-center px-6 py-16">
         <motion.div variants={containerVariants} initial="hidden" animate="show" className="max-w-2xl">
           <motion.p
             variants={itemVariants}
