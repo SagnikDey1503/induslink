@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none" role="img" aria-label="IndusLink mark">
+  <defs>
+    <linearGradient id="il_grad" x1="10" y1="8" x2="54" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f38c3a" />
+      <stop offset="0.55" stop-color="#f7a35c" />
+      <stop offset="1" stop-color="#35b37f" />
+    </linearGradient>
+    <radialGradient id="il_glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(20 18) rotate(90) scale(28 28)">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.35" />
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="il_border" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.32" />
+      <stop offset="1" stop-color="#0d0f14" stop-opacity="0.25" />
+    </linearGradient>
+  </defs>
+
+  <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#il_grad)" />
+  <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#il_glow)" />
+  <rect x="4" y="4" width="56" height="56" rx="16" stroke="url(#il_border)" stroke-width="1.5" />
+
+  <!-- Chain link: two loops + bridge -->
+  <path
+    d="M28 38h-4a8 8 0 1 1 0-16h4"
+    stroke="#0d0f14"
+    stroke-width="5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M36 26h4a8 8 0 1 1 0 16h-4"
+    stroke="#0d0f14"
+    stroke-width="5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <path d="M26 32h12" stroke="#0d0f14" stroke-width="5" stroke-linecap="round" />
+
+  <!-- Schematic nodes -->
+  <circle cx="18" cy="46" r="2.4" fill="#0d0f14" fill-opacity="0.22" />
+  <circle cx="48" cy="18" r="2.4" fill="#0d0f14" fill-opacity="0.28" />
+</svg>
+
