@@ -98,7 +98,7 @@ function signToken(user) {
 function setAuthCookie(res, token) {
   res.cookie(SESSION_COOKIE, token, {
     httpOnly: true,
-    sameSite: "lax",
+    sameSite: isProduction ? "none" : "lax",
     secure: isProduction,
     maxAge: COOKIE_MAX_AGE,
     path: "/"
@@ -106,7 +106,11 @@ function setAuthCookie(res, token) {
 }
 
 function clearAuthCookie(res) {
-  res.clearCookie(SESSION_COOKIE, { path: "/" });
+  res.clearCookie(SESSION_COOKIE, {
+    path: "/",
+    sameSite: isProduction ? "none" : "lax",
+    secure: isProduction
+  });
 }
 
 async function getUserFromRequest(req) {
