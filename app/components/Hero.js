@@ -189,6 +189,7 @@ export default function Hero() {
               <p>Faster discovery</p>
             </div>
           </motion.div>
+        </motion.div>
       </div>
     </section>
   );

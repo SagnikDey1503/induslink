@@ -165,6 +165,7 @@ app.get("/api/industries", async (_req, res) => {
   try {
     await dbConnect();
     const industries = await Industry.find({}).sort({ name: 1 }).lean();
+    res.set("Cache-Control", "public, max-age=60, stale-while-revalidate=300");
     res.json({ data: industries });
   } catch (error) {
     res.status(500).json({ error: "Failed to load industries." });
@@ -198,8 +199,37 @@ app.get("/api/machines", async (req, res) => {
       filters.verified = true;
     }
 
-    const machines = await Machine.find(filters).sort({ createdAt: -1 }).lean();
-    res.json({ data: machines });
+    const summary = ["1", "true", "yes"].includes(String(req.query.summary || "").toLowerCase());
+    const limitValue = Number.parseInt(String(req.query.limit || ""), 10);
+    const limit = Number.isFinite(limitValue) && limitValue > 0 ? Math.min(limitValue, 120) : null;
+
+    let query = Machine.find(filters).sort({ createdAt: -1 });
+    if (limit) query = query.limit(limit);
+
+    const machines = await query.lean();
+    const payload = summary
+      ? machines.map((machine) => ({
+          _id: machine._id,
+          name: machine.name,
+          slug: machine.slug,
+          description: machine.description,
+          industrySlug: machine.industrySlug,
+          subIndustrySlug: machine.subIndustrySlug,
+          ownerUserId: machine.ownerUserId,
+          manufacturer: machine.manufacturer,
+          verified: machine.verified,
+          features: Array.isArray(machine.features) ? machine.features.slice(0, 3) : [],
+          photos: Array.isArray(machine.photos) && machine.photos.length ? [machine.photos[0]] : [],
+          minOrderQty: machine.minOrderQty || "",
+          leadTimeDays: machine.leadTimeDays || "",
+          condition: machine.condition || "new",
+          priceRange: machine.priceRange || "",
+          warrantyMonths: machine.warrantyMonths ?? null
+        }))
+      : machines;
+
+    res.set("Cache-Control", "public, max-age=60, stale-while-revalidate=300");
+    res.json({ data: payload });
   } catch (error) {
     res.status(500).json({ error: "Failed to load machines." });
   }

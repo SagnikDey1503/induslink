@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 export default async function Home() {
   const [industries, machines] = await Promise.all([
     getIndustries(),
-    getMachines({ verified: true })
+    getMachines({ verified: true, limit: 3 })
   ]);
 
   return (

@@ -22,7 +22,7 @@ export default function BuyerPortalPage() {
 
   useEffect(() => {
     // Load machines
-    apiFetch("/api/machines")
+    apiFetch("/api/machines?summary=true")
       .then((payload) => {
         setMachines(payload.data || []);
         setFilteredMachines(payload.data || []);
