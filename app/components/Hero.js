@@ -24,35 +24,125 @@ const statVariants = {
 };
 
 export default function Hero() {
-  const orbRef = useRef(null);
-  const imageCardRef = useRef(null);
+  const glowARef = useRef(null);
+  const glowBRef = useRef(null);
+  const glowCRef = useRef(null);
 
   useEffect(() => {
-    if (orbRef.current) {
-      gsap.to(orbRef.current, {
-        y: 16,
-        duration: 4,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut"
-      });
+    const animations = [];
+
+    if (glowARef.current) {
+      animations.push(
+        gsap.to(glowARef.current, {
+          x: 40,
+          y: 18,
+          duration: 8,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut"
+        })
+      );
     }
 
-    if (imageCardRef.current) {
-      gsap.to(imageCardRef.current, {
-        y: -10,
-        duration: 5,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut"
-      });
+    if (glowBRef.current) {
+      animations.push(
+        gsap.to(glowBRef.current, {
+          x: -26,
+          y: -22,
+          duration: 9,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut"
+        })
+      );
     }
+
+    if (glowCRef.current) {
+      animations.push(
+        gsap.to(glowCRef.current, {
+          x: 18,
+          y: -28,
+          duration: 10,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut"
+        })
+      );
+    }
+
+    return () => {
+      animations.forEach((anim) => anim?.kill());
+    };
   }, []);
 
   return (
     <section className="relative overflow-hidden bg-ink-950 text-white">
-      <div className="mx-auto grid w-full max-w-6xl gap-12 px-6 py-16 md:grid-cols-2 md:items-center">
-        <motion.div variants={containerVariants} initial="hidden" animate="show">
+      {/* Background layers */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-90"
+        style={{
+          background:
+            "radial-gradient(circle at 18% 22%, rgba(243,140,58,0.28), transparent 55%), radial-gradient(circle at 78% 18%, rgba(53,179,127,0.18), transparent 50%), radial-gradient(circle at 60% 82%, rgba(95,120,152,0.22), transparent 55%)"
+        }}
+      />
+      <div className="pointer-events-none absolute inset-0 bg-steel-grid opacity-60" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(13,15,20,0.65)_65%,rgba(13,15,20,0.98)_100%)]" />
+
+      {/* Moving glows */}
+      <div
+        ref={glowARef}
+        className="pointer-events-none absolute -left-24 top-24 h-72 w-72 rounded-full bg-copper-500/25 blur-3xl"
+      />
+      <div
+        ref={glowBRef}
+        className="pointer-events-none absolute right-[-140px] top-20 h-80 w-80 rounded-full bg-jade-500/20 blur-3xl"
+      />
+      <div
+        ref={glowCRef}
+        className="pointer-events-none absolute right-24 bottom-[-160px] h-96 w-96 rounded-full bg-steel-500/20 blur-3xl"
+      />
+
+      {/* Schematic network */}
+      <svg
+        className="pointer-events-none absolute -right-24 top-1/2 hidden h-[520px] w-[640px] -translate-y-1/2 opacity-25 md:block"
+        viewBox="0 0 640 520"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M80 120C160 90 220 140 290 170C360 205 430 205 520 150C585 110 610 150 610 220C610 300 545 320 490 340C410 370 360 430 290 420C220 410 170 360 110 330C50 300 30 240 60 190C70 165 55 140 80 120Z"
+          stroke="rgba(221,229,239,0.55)"
+          strokeWidth="2.5"
+        />
+        {[
+          [112, 190],
+          [160, 150],
+          [240, 190],
+          [310, 220],
+          [410, 230],
+          [520, 170],
+          [560, 240],
+          [470, 320],
+          [360, 370],
+          [260, 380],
+          [150, 320],
+          [92, 260]
+        ].map(([x, y]) => (
+          <g key={`${x}-${y}`}>
+            <circle cx={x} cy={y} r="6" fill="rgba(243,140,58,0.9)" />
+            <circle cx={x} cy={y} r="14" stroke="rgba(243,140,58,0.25)" strokeWidth="2" />
+          </g>
+        ))}
+        <path
+          d="M112 190L160 150L240 190L310 220L410 230L520 170L560 240L470 320L360 370L260 380L150 320L92 260L112 190Z"
+          stroke="rgba(53,179,127,0.35)"
+          strokeWidth="2"
+          strokeDasharray="7 10"
+        />
+      </svg>
+
+      <div className="relative mx-auto flex min-h-[calc(100vh-4rem)] w-full max-w-6xl items-center px-6 py-16">
+        <motion.div variants={containerVariants} initial="hidden" animate="show" className="max-w-2xl">
           <motion.p
             variants={itemVariants}
             className="text-xs font-semibold uppercase tracking-[0.3em] text-copper-500"
@@ -99,27 +189,6 @@ export default function Hero() {
               <p>Faster discovery</p>
             </div>
           </motion.div>
-        </motion.div>
-        <div className="relative">
-          <div
-            ref={orbRef}
-            className="absolute -right-6 -top-6 h-20 w-20 rounded-full bg-copper-500/30 blur-2xl"
-          />
-          <div ref={imageCardRef} className="rounded-3xl bg-ink-800 p-6 shadow-glow">
-            <div className="relative h-64 w-full overflow-hidden rounded-2xl bg-ink-900">
-              <img
-                src="/hero-manufacturing.svg"
-                alt="Modern manufacturing floor"
-                className="h-full w-full object-cover"
-                loading="lazy"
-              />
-            </div>
-            <div className="mt-6 rounded-2xl bg-ink-900/70 p-4">
-              <p className="text-sm text-steel-200">Verified suppliers across 5 core industries.</p>
-              <p className="mt-2 text-xs text-steel-400">Structured specs, compliance, and ROI insights.</p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
