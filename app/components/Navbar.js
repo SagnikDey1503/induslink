@@ -58,9 +58,9 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-ink-950 text-white">
-      <div className="mx-auto flex w-full items-center justify-between px-6 py-4 gap-6">
-        <div className="flex items-center gap-3 flex-shrink-0">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-ink-950/90 text-white backdrop-blur">
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-[1fr_auto_1fr] items-center gap-6 px-6 py-3">
+        <div className="flex items-center gap-3 justify-self-start">
           <div className="h-10 w-10 rounded-xl bg-copper-500 text-ink-950 grid place-items-center font-heading text-lg font-semibold">
             IL
           </div>
@@ -71,15 +71,13 @@ export default function Navbar() {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-6 text-xs lg:text-sm md:flex flex-1 justify-center">
-          <Link href="/industries" className="text-steel-200 hover:text-amber-300 transition-colors whitespace-nowrap">Industries</Link>
-          <Link href="/" className="text-steel-200 hover:text-amber-300 transition-colors whitespace-nowrap">How it Works</Link>
-          {!portal ? (
-            <>
-              <Link href="/register/buyer" className="text-steel-200 hover:text-amber-300 transition-colors whitespace-nowrap">MSME Reg</Link>
-              <Link href="/register/supplier" className="text-steel-200 hover:text-amber-300 transition-colors whitespace-nowrap">Supplier Reg</Link>
-            </>
-          ) : null}
+        <nav className="hidden items-center gap-8 text-xs lg:text-sm md:flex justify-self-center">
+          <Link href="/industries" className="text-steel-200 hover:text-amber-300 transition-colors whitespace-nowrap">
+            Industries
+          </Link>
+          <Link href="/" className="text-steel-200 hover:text-amber-300 transition-colors whitespace-nowrap">
+            How it Works
+          </Link>
           <Link
             href="/portal/admin/verify-machines"
             className="text-steel-300 hover:text-amber-300 transition-colors whitespace-nowrap"
@@ -89,7 +87,7 @@ export default function Navbar() {
         </nav>
 
         {/* Desktop Right Actions (login / portal / logout) */}
-        <div className="hidden md:flex items-center gap-3 flex-shrink-0">
+        <div className="hidden md:flex items-center justify-self-end gap-3">
           {portal ? (
             <>
               <Link
@@ -138,7 +136,7 @@ export default function Navbar() {
         {/* Mobile Menu Button */}
         <button
           onClick={toggleMenu}
-          className="md:hidden flex flex-col gap-1.5 justify-center items-center w-10 h-10 ml-auto"
+          className="md:hidden flex flex-col gap-1.5 justify-center items-center w-10 h-10 justify-self-end"
           aria-label="Toggle menu"
         >
           <span className={`h-0.5 w-6 bg-white transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
