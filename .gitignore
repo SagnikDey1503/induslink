@@ -1,0 +1,14 @@
+.env
+.env.*
+.DS_Store
+.next
+node_modules
+dist
+out
+coverage
+*.log
+tmp
+public/uploads
+**/public/uploads
+**/.vercel
+induslink/

@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" fill="none" role="img" aria-label="Modern manufacturing floor illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#131826" />
+      <stop offset="0.55" stop-color="#1c2437" />
+      <stop offset="1" stop-color="#0d0f14" />
+    </linearGradient>
+
+    <radialGradient id="glowA" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(250 200) rotate(90) scale(380 520)">
+      <stop offset="0" stop-color="#f38c3a" stop-opacity="0.35" />
+      <stop offset="1" stop-color="#f38c3a" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="glowB" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(990 170) rotate(90) scale(340 520)">
+      <stop offset="0" stop-color="#5f7898" stop-opacity="0.25" />
+      <stop offset="1" stop-color="#5f7898" stop-opacity="0" />
+    </radialGradient>
+
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M64 0H0V64" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1" />
+    </pattern>
+
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0d0f14" stop-opacity="0.75" />
+      <stop offset="1" stop-color="#0d0f14" stop-opacity="0.95" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#bg)" />
+  <rect width="1200" height="800" fill="url(#glowA)" />
+  <rect width="1200" height="800" fill="url(#glowB)" />
+  <rect width="1200" height="800" fill="url(#grid)" opacity="0.65" />
+
+  <!-- Ambient light beams -->
+  <path d="M190 120L560 740" stroke="#ffffff" stroke-opacity="0.05" stroke-width="46" />
+  <path d="M1020 90L650 760" stroke="#ffffff" stroke-opacity="0.04" stroke-width="54" />
+
+  <!-- Floor -->
+  <path d="M0 620C150 585 320 575 520 590C690 603 860 636 1200 610V800H0V620Z" fill="#0d0f14" fill-opacity="0.7" />
+  <path d="M0 662C220 632 420 630 630 650C850 670 1020 706 1200 690" stroke="#dde5ef" stroke-opacity="0.08" stroke-width="2" />
+
+  <!-- Factory silhouette -->
+  <g opacity="0.95">
+    <path d="M120 540V420L250 470L360 420L470 470L610 410V540H120Z" fill="url(#panel)" stroke="#5f7898" stroke-opacity="0.35" />
+    <rect x="120" y="540" width="520" height="80" fill="#0d0f14" fill-opacity="0.88" stroke="#5f7898" stroke-opacity="0.35" />
+
+    <!-- Windows -->
+    <g>
+      <rect x="150" y="565" width="46" height="26" rx="6" fill="#1c2437" stroke="#7a93b1" stroke-opacity="0.35" />
+      <rect x="210" y="565" width="46" height="26" rx="6" fill="#1c2437" stroke="#7a93b1" stroke-opacity="0.35" />
+      <rect x="270" y="565" width="46" height="26" rx="6" fill="#1c2437" stroke="#7a93b1" stroke-opacity="0.35" />
+      <rect x="330" y="565" width="46" height="26" rx="6" fill="#1c2437" stroke="#7a93b1" stroke-opacity="0.35" />
+      <rect x="390" y="565" width="46" height="26" rx="6" fill="#1c2437" stroke="#7a93b1" stroke-opacity="0.35" />
+      <rect x="450" y="565" width="46" height="26" rx="6" fill="#1c2437" stroke="#7a93b1" stroke-opacity="0.35" />
+      <rect x="510" y="565" width="46" height="26" rx="6" fill="#1c2437" stroke="#7a93b1" stroke-opacity="0.35" />
+      <rect x="570" y="565" width="46" height="26" rx="6" fill="#1c2437" stroke="#7a93b1" stroke-opacity="0.35" />
+    </g>
+  </g>
+
+  <!-- Conveyor + modules -->
+  <g opacity="0.98">
+    <path d="M310 515H920" stroke="#c4d1e1" stroke-opacity="0.28" stroke-width="10" stroke-linecap="round" />
+    <path d="M310 535H920" stroke="#7a93b1" stroke-opacity="0.22" stroke-width="2" stroke-linecap="round" />
+    <g>
+      <rect x="360" y="480" width="100" height="44" rx="12" fill="#1c2437" stroke="#7a93b1" stroke-opacity="0.35" />
+      <rect x="500" y="478" width="120" height="46" rx="12" fill="#131826" stroke="#7a93b1" stroke-opacity="0.35" />
+      <rect x="660" y="480" width="90" height="44" rx="12" fill="#1c2437" stroke="#7a93b1" stroke-opacity="0.35" />
+      <rect x="780" y="478" width="120" height="46" rx="12" fill="#131826" stroke="#7a93b1" stroke-opacity="0.35" />
+    </g>
+
+    <!-- Sensor lights -->
+    <circle cx="410" cy="502" r="4" fill="#f38c3a" />
+    <circle cx="560" cy="501" r="4" fill="#35b37f" />
+    <circle cx="705" cy="502" r="4" fill="#f38c3a" />
+    <circle cx="835" cy="501" r="4" fill="#35b37f" />
+  </g>
+
+  <!-- Robotic arm -->
+  <g opacity="0.98">
+    <circle cx="980" cy="420" r="26" fill="#131826" stroke="#7a93b1" stroke-opacity="0.45" stroke-width="3" />
+    <path d="M980 420L925 455" stroke="#dde5ef" stroke-opacity="0.35" stroke-width="14" stroke-linecap="round" />
+    <circle cx="925" cy="455" r="18" fill="#1c2437" stroke="#7a93b1" stroke-opacity="0.45" stroke-width="3" />
+    <path d="M925 455L890 520" stroke="#dde5ef" stroke-opacity="0.35" stroke-width="12" stroke-linecap="round" />
+    <circle cx="890" cy="520" r="16" fill="#131826" stroke="#7a93b1" stroke-opacity="0.45" stroke-width="3" />
+    <path d="M890 520L860 560" stroke="#dde5ef" stroke-opacity="0.32" stroke-width="10" stroke-linecap="round" />
+    <path d="M850 565L870 575" stroke="#f38c3a" stroke-opacity="0.9" stroke-width="6" stroke-linecap="round" />
+    <path d="M876 555L874 579" stroke="#f38c3a" stroke-opacity="0.7" stroke-width="4" stroke-linecap="round" />
+  </g>
+
+  <!-- Foreground label chip -->
+  <g>
+    <rect x="62" y="64" width="282" height="46" rx="18" fill="#0d0f14" fill-opacity="0.55" stroke="#7a93b1" stroke-opacity="0.35" />
+    <circle cx="92" cy="87" r="6" fill="#f38c3a" />
+    <circle cx="112" cy="87" r="6" fill="#35b37f" />
+    <circle cx="132" cy="87" r="6" fill="#7a93b1" />
+    <path d="M160 97H324" stroke="#dde5ef" stroke-opacity="0.35" stroke-width="3" stroke-linecap="round" />
+    <path d="M160 80H286" stroke="#dde5ef" stroke-opacity="0.22" stroke-width="3" stroke-linecap="round" />
+  </g>
+</svg>
+
