@@ -23,9 +23,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${heading.variable} ${body.variable}`}>
-      <body className="bg-steel-100 text-ink-900">
+      <body className="min-h-screen bg-steel-100 text-ink-900 flex flex-col">
         <Navbar />
-        <main className="pt-16">
+        <main className="pt-16 flex-1">
           {children}
         </main>
         <Footer />
