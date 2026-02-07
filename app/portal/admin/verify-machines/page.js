@@ -162,61 +162,62 @@ export default function AdminVerifyMachinesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <div className="mx-auto max-w-5xl space-y-6">
-        <div className="flex flex-wrap items-center justify-between gap-3">
+    <div className="min-h-screen bg-gradient-to-br from-steel-100 via-white to-steel-50">
+      <div className="mx-auto max-w-7xl space-y-6 px-6 py-8">
+        <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl bg-gradient-to-r from-ink-950 to-ink-900 p-6 text-white shadow-lg">
           <div>
-            <h1 className="text-3xl font-bold">Machine Verification Admin</h1>
-            <p className="text-sm text-gray-600">
+            <h1 className="text-3xl font-heading font-bold">Machine Verification Admin</h1>
+            <p className="mt-1 text-sm text-steel-300">
               Approve or reject supplier submissions and publish verified machines.
             </p>
           </div>
-          <Link href="/" className="text-sm font-semibold text-blue-600 hover:text-blue-800">
-            Back to site
+          <Link href="/" className="rounded-full bg-white/10 px-4 py-2 text-sm font-semibold hover:bg-white/20 transition">
+            ← Back to site
           </Link>
         </div>
 
-        <div className="rounded-lg bg-white p-5 shadow">
+        <div className="rounded-2xl bg-white p-6 shadow-soft border border-steel-200">
           <div className="grid gap-4 md:grid-cols-3">
-            <label className="text-sm font-semibold text-gray-700">
+            <label className="text-sm font-semibold text-ink-900">
               Admin Key
               <input
                 type="password"
                 value={adminKey}
                 onChange={(e) => setAdminKey(e.target.value)}
-                placeholder="Set ADMIN_KEY in api env and paste it here"
-                className="mt-2 w-full rounded border px-3 py-2 outline-none focus:border-blue-500"
+                placeholder="Enter ADMIN_KEY"
+                className="mt-2 w-full rounded-xl border border-steel-300 px-4 py-2.5 outline-none focus:border-copper-500 focus:ring-2 focus:ring-copper-500/20 transition"
               />
               <div className="mt-2 flex items-center justify-between gap-3">
-                <label className="flex items-center gap-2 text-xs font-medium text-gray-600">
+                <label className="flex items-center gap-2 text-xs font-medium text-ink-700">
                   <input
                     type="checkbox"
                     checked={rememberKey}
                     onChange={(e) => setRememberKey(e.target.checked)}
+                    className="rounded border-steel-300 text-copper-600 focus:ring-copper-500"
                   />
                   Remember key
                 </label>
                 <button
                   type="button"
                   onClick={clearSavedKey}
-                  className="text-xs font-semibold text-gray-600 hover:text-gray-900"
+                  className="text-xs font-semibold text-ink-600 hover:text-ink-900 transition"
                 >
-                  Clear saved key
+                  Clear saved
                 </button>
               </div>
             </label>
 
-            <label className="text-sm font-semibold text-gray-700">
-              Filter
+            <label className="text-sm font-semibold text-ink-900">
+              Filter Status
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="mt-2 w-full rounded border px-3 py-2 outline-none focus:border-blue-500"
+                className="mt-2 w-full rounded-xl border border-steel-300 px-4 py-2.5 outline-none focus:border-copper-500 focus:ring-2 focus:ring-copper-500/20 transition"
               >
-                <option value="pending">Pending</option>
-                <option value="approved">Approved</option>
-                <option value="rejected">Rejected</option>
-                <option value="">All</option>
+                <option value="pending">⏳ Pending</option>
+                <option value="approved">✓ Approved</option>
+                <option value="rejected">✗ Rejected</option>
+                <option value="">All Submissions</option>
               </select>
             </label>
 
@@ -225,97 +226,105 @@ export default function AdminVerifyMachinesPage() {
                 type="button"
                 onClick={loadQueue}
                 disabled={loading}
-                className="w-full rounded bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:bg-gray-400"
+                className="w-full rounded-xl bg-copper-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-copper-700 disabled:bg-steel-400 transition shadow-soft"
               >
-                {loading ? "Loading..." : "Load Queue"}
+                {loading ? "Loading..." : "🔄 Load Queue"}
               </button>
             </div>
           </div>
 
-          {error ? <p className="mt-4 text-sm text-red-600">{error}</p> : null}
+          {error ? <p className="mt-4 rounded-xl bg-red-50 border border-red-200 p-3 text-sm text-red-700">{error}</p> : null}
         </div>
 
         <div className="space-y-4">
           {queue.length === 0 ? (
-            <div className="rounded-lg bg-white p-8 text-center shadow">
-              <p className="text-gray-600">No verification submissions found for this filter.</p>
+            <div className="rounded-2xl bg-white p-12 text-center shadow-soft border border-steel-200">
+              <div className="mx-auto w-16 h-16 rounded-full bg-steel-100 flex items-center justify-center mb-4">
+                <span className="text-2xl">📋</span>
+              </div>
+              <p className="text-ink-700 font-medium">No verification submissions found for this filter.</p>
+              <p className="text-sm text-ink-600 mt-1">Try changing the filter or loading the queue.</p>
             </div>
           ) : (
             queue.map((item) => (
-              <div key={item._id} className="rounded-lg bg-white p-6 shadow">
+              <div key={item._id} className="rounded-2xl bg-white p-6 shadow-soft border border-steel-200 hover:shadow-lg transition">
                 <div className="flex flex-wrap items-start justify-between gap-4">
-                  <div className="min-w-0">
-                    <h2 className="text-xl font-bold">{item.name}</h2>
-                    <p className="mt-1 text-sm text-gray-600 whitespace-pre-wrap">{item.description}</p>
-                    <div className="mt-3 flex flex-wrap gap-2 text-xs">
-                      <span className="rounded-full bg-gray-100 px-3 py-1 text-gray-700">
-                        Industry: <span className="font-semibold">{item.industrySlug}</span>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-start gap-3">
+                      <div className="flex-1">
+                        <h2 className="text-2xl font-heading font-bold text-ink-950">{item.name}</h2>
+                        <p className="mt-2 text-sm text-ink-700 leading-relaxed whitespace-pre-wrap">{item.description}</p>
+                      </div>
+                    </div>
+                    <div className="mt-4 flex flex-wrap gap-2 text-xs">
+                      <span className="rounded-full bg-blue-50 border border-blue-200 px-3 py-1.5 text-blue-700 font-medium">
+                        🏭 {item.industrySlug}
                       </span>
-                      <span className="rounded-full bg-gray-100 px-3 py-1 text-gray-700">
-                        Sub: <span className="font-semibold">{item.subIndustrySlug}</span>
+                      <span className="rounded-full bg-purple-50 border border-purple-200 px-3 py-1.5 text-purple-700 font-medium">
+                        📦 {item.subIndustrySlug}
                       </span>
-                      <span className="rounded-full bg-gray-100 px-3 py-1 text-gray-700">
-                        Submitted: <span className="font-semibold">{formatDateTime(item.createdAt)}</span>
+                      <span className="rounded-full bg-steel-100 border border-steel-300 px-3 py-1.5 text-ink-700 font-medium">
+                        📅 {formatDateTime(item.createdAt)}
                       </span>
                     </div>
                   </div>
 
-                  <div className="flex shrink-0 flex-col items-end gap-2">
+                  <div className="flex shrink-0 flex-col items-end gap-3">
                     <div className="flex items-center gap-2">
                       {awaitingSellerResponse(item.messages) ? (
                         <span
-                          className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                          className={`rounded-full px-3 py-1.5 text-xs font-semibold shadow-sm ${
                             lastMessage(item.messages)?.priority
-                              ? "bg-red-100 text-red-800"
-                              : "bg-amber-100 text-amber-800"
+                              ? "bg-red-100 border border-red-300 text-red-800"
+                              : "bg-amber-100 border border-amber-300 text-amber-800"
                           }`}
                         >
-                          {lastMessage(item.messages)?.priority ? "Priority: awaiting seller" : "Awaiting seller"}
+                          {lastMessage(item.messages)?.priority ? "⚠️ Priority: awaiting seller" : "⏳ Awaiting seller"}
                         </span>
                       ) : null}
                       <span
-                        className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                        className={`rounded-full px-3 py-1.5 text-xs font-semibold shadow-sm ${
                           item.status === "approved"
-                            ? "bg-green-100 text-green-800"
+                            ? "bg-green-100 border border-green-300 text-green-800"
                             : item.status === "rejected"
-                              ? "bg-red-100 text-red-800"
-                              : "bg-amber-100 text-amber-800"
+                              ? "bg-red-100 border border-red-300 text-red-800"
+                              : "bg-amber-100 border border-amber-300 text-amber-800"
                         }`}
                       >
-                        {item.status}
+                        {item.status === "approved" ? "✓ Approved" : item.status === "rejected" ? "✗ Rejected" : "⏳ Pending"}
                       </span>
                     </div>
 
-                    <div className="flex shrink-0 flex-col gap-2 min-w-[160px]">
+                    <div className="flex shrink-0 flex-col gap-2 min-w-[180px]">
                       {item.status === "pending" ? (
                         <>
                           <button
                             type="button"
                             disabled={updatingStatusId === item._id}
                             onClick={() => updateStatus(item._id, "approved")}
-                            className="rounded bg-green-600 px-4 py-2 text-sm font-semibold text-white hover:bg-green-700 disabled:bg-gray-400"
+                            className="rounded-xl bg-green-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-green-700 disabled:bg-steel-400 transition shadow-soft"
                           >
-                            {updatingStatusId === item._id ? "Working..." : "Approve"}
+                            {updatingStatusId === item._id ? "Working..." : "✓ Approve"}
                           </button>
                           <button
                             type="button"
                             disabled={updatingStatusId === item._id}
                             onClick={() => updateStatus(item._id, "rejected")}
-                            className="rounded bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700 disabled:bg-gray-400"
+                            className="rounded-xl bg-red-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-red-700 disabled:bg-steel-400 transition shadow-soft"
                           >
-                            {updatingStatusId === item._id ? "Working..." : "Reject"}
+                            {updatingStatusId === item._id ? "Working..." : "✗ Reject"}
                           </button>
                         </>
                       ) : (
-                        <div className="rounded border border-gray-200 bg-gray-50 px-4 py-3 text-sm font-semibold text-gray-700 text-center">
-                          {item.status === "approved" ? "Approved" : "Rejected"}
+                        <div className="rounded-xl border-2 border-steel-200 bg-steel-50 px-4 py-3 text-sm font-semibold text-ink-800 text-center">
+                          {item.status === "approved" ? "✓ Approved" : "✗ Rejected"}
                           {item.status === "approved" && item.machineId ? (
                             <div className="mt-2">
                               <Link
                                 href={`/machines/${item.machineId}`}
-                                className="text-xs font-semibold text-blue-600 hover:text-blue-800"
+                                className="text-xs font-semibold text-copper-600 hover:text-copper-800 transition"
                               >
-                                View live machine
+                                🔗 View live machine →
                               </Link>
                             </div>
                           ) : null}
@@ -325,79 +334,90 @@ export default function AdminVerifyMachinesPage() {
                   </div>
                 </div>
 
-                <div className="mt-5 grid gap-4 md:grid-cols-2">
+                <div className="mt-6 grid gap-6 md:grid-cols-2">
                   <div>
-                    <p className="text-sm font-semibold mb-2">Photos</p>
+                    <p className="text-sm font-semibold text-ink-900 mb-3 flex items-center gap-2">
+                      <span>📸</span> Photos
+                    </p>
                     {item.photos?.length ? (
-                      <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                         {item.photos.slice(0, 6).map((src, index) => (
                           <a
                             key={`${item._id}-photo-${index}`}
                             href={src}
                             target="_blank"
                             rel="noreferrer"
-                            className="block"
+                            className="block group relative overflow-hidden rounded-xl"
                             title="Open full image"
                           >
                             <img
                               src={src}
                               alt={`Photo ${index + 1}`}
-                              className="h-28 w-full rounded border object-cover"
+                              className="h-32 w-full rounded-xl border-2 border-steel-200 object-cover group-hover:scale-105 transition-transform duration-300"
                             />
+                            <div className="absolute inset-0 bg-ink-950/0 group-hover:bg-ink-950/10 transition-colors rounded-xl" />
                           </a>
                         ))}
                       </div>
                     ) : (
-                      <div className="rounded border bg-gray-50 p-4 text-sm text-gray-600">
-                        No photos uploaded.
+                      <div className="rounded-xl border-2 border-dashed border-steel-300 bg-steel-50 p-6 text-center">
+                        <span className="text-2xl opacity-50">🖼️</span>
+                        <p className="text-sm text-ink-600 mt-2">No photos uploaded</p>
                       </div>
                     )}
                   </div>
 
                   <div className="grid gap-2 text-sm">
-                    <div className="rounded border bg-gray-50 px-3 py-2 flex justify-between">
-                      <span className="font-semibold text-gray-800">Seller</span>
-                      <span className="text-gray-700">{sellerLabel(item.sellerId)}</span>
+                    <p className="text-sm font-semibold text-ink-900 mb-1 flex items-center gap-2">
+                      <span>💼</span> Seller Information
+                    </p>
+                    <div className="rounded-xl border border-steel-200 bg-steel-50 px-4 py-2.5 flex justify-between">
+                      <span className="font-semibold text-ink-800">Seller</span>
+                      <span className="text-ink-700">{sellerLabel(item.sellerId)}</span>
                     </div>
-                    <div className="rounded border bg-gray-50 px-3 py-2 flex justify-between">
-                      <span className="font-semibold text-gray-800">Email</span>
-                      <span className="text-gray-700">{item.sellerId?.email || "—"}</span>
+                    <div className="rounded-xl border border-steel-200 bg-steel-50 px-4 py-2.5 flex justify-between">
+                      <span className="font-semibold text-ink-800">Email</span>
+                      <span className="text-ink-700">{item.sellerId?.email || "—"}</span>
                     </div>
-                    <div className="rounded border bg-gray-50 px-3 py-2 flex justify-between">
-                      <span className="font-semibold text-gray-800">Phone</span>
-                      <span className="text-gray-700">{item.sellerId?.phone || "—"}</span>
+                    <div className="rounded-xl border border-steel-200 bg-steel-50 px-4 py-2.5 flex justify-between">
+                      <span className="font-semibold text-ink-800">Phone</span>
+                      <span className="text-ink-700">{item.sellerId?.phone || "—"}</span>
                     </div>
-                    <div className="rounded border bg-gray-50 px-3 py-2 flex justify-between">
-                      <span className="font-semibold text-gray-800">Location</span>
-                      <span className="text-gray-700">{item.sellerId?.location || "—"}</span>
+                    <div className="rounded-xl border border-steel-200 bg-steel-50 px-4 py-2.5 flex justify-between">
+                      <span className="font-semibold text-ink-800">Location</span>
+                      <span className="text-ink-700">{item.sellerId?.location || "—"}</span>
                     </div>
-                    <div className="rounded border bg-gray-50 px-3 py-2 flex justify-between">
-                      <span className="font-semibold text-gray-800">GSTIN</span>
-                      <span className="text-gray-700">{item.sellerId?.gstin || "—"}</span>
+                    <div className="rounded-xl border border-steel-200 bg-steel-50 px-4 py-2.5 flex justify-between">
+                      <span className="font-semibold text-ink-800">GSTIN</span>
+                      <span className="text-ink-700 font-mono text-xs">{item.sellerId?.gstin || "—"}</span>
                     </div>
-                    <div className="rounded border bg-gray-50 px-3 py-2 flex justify-between">
-                      <span className="font-semibold text-gray-800">Manufacturer</span>
-                      <span className="text-gray-700">{item.manufacturer || "—"}</span>
+                    
+                    <p className="text-sm font-semibold text-ink-900 mt-3 mb-1 flex items-center gap-2">
+                      <span>⚙️</span> Machine Details
+                    </p>
+                    <div className="rounded-xl border border-steel-200 bg-steel-50 px-4 py-2.5 flex justify-between">
+                      <span className="font-semibold text-ink-800">Manufacturer</span>
+                      <span className="text-ink-700">{item.manufacturer || "—"}</span>
                     </div>
-                    <div className="rounded border bg-gray-50 px-3 py-2 flex justify-between">
-                      <span className="font-semibold text-gray-800">Min Order</span>
-                      <span className="text-gray-700">{item.minOrderQty || "—"}</span>
+                    <div className="rounded-xl border border-steel-200 bg-steel-50 px-4 py-2.5 flex justify-between">
+                      <span className="font-semibold text-ink-800">Condition</span>
+                      <span className="text-ink-700 capitalize">{item.condition || "new"}</span>
                     </div>
-                    <div className="rounded border bg-gray-50 px-3 py-2 flex justify-between">
-                      <span className="font-semibold text-gray-800">Lead Time</span>
-                      <span className="text-gray-700">{item.leadTimeDays || "—"}</span>
+                    <div className="rounded-xl border border-steel-200 bg-steel-50 px-4 py-2.5 flex justify-between">
+                      <span className="font-semibold text-ink-800">Price Range</span>
+                      <span className="text-ink-700">{item.priceRange || "—"}</span>
                     </div>
-                    <div className="rounded border bg-gray-50 px-3 py-2 flex justify-between">
-                      <span className="font-semibold text-gray-800">Condition</span>
-                      <span className="text-gray-700">{item.condition || "new"}</span>
+                    <div className="rounded-xl border border-steel-200 bg-steel-50 px-4 py-2.5 flex justify-between">
+                      <span className="font-semibold text-ink-800">Min Order</span>
+                      <span className="text-ink-700">{item.minOrderQty || "—"}</span>
                     </div>
-                    <div className="rounded border bg-gray-50 px-3 py-2 flex justify-between">
-                      <span className="font-semibold text-gray-800">Price Range</span>
-                      <span className="text-gray-700">{item.priceRange || "—"}</span>
+                    <div className="rounded-xl border border-steel-200 bg-steel-50 px-4 py-2.5 flex justify-between">
+                      <span className="font-semibold text-ink-800">Lead Time</span>
+                      <span className="text-ink-700">{item.leadTimeDays ? `${item.leadTimeDays} days` : "—"}</span>
                     </div>
-                    <div className="rounded border bg-gray-50 px-3 py-2 flex justify-between">
-                      <span className="font-semibold text-gray-800">Warranty</span>
-                      <span className="text-gray-700">
+                    <div className="rounded-xl border border-steel-200 bg-steel-50 px-4 py-2.5 flex justify-between">
+                      <span className="font-semibold text-ink-800">Warranty</span>
+                      <span className="text-ink-700">
                         {Number.isFinite(item.warrantyMonths) ? `${item.warrantyMonths} months` : "—"}
                       </span>
                     </div>
@@ -405,13 +425,15 @@ export default function AdminVerifyMachinesPage() {
                 </div>
 
                 {item.features?.length ? (
-                  <div className="mt-5">
-                    <p className="text-sm font-semibold mb-2">Features</p>
+                  <div className="mt-6">
+                    <p className="text-sm font-semibold text-ink-900 mb-3 flex items-center gap-2">
+                      <span>✨</span> Features
+                    </p>
                     <div className="flex flex-wrap gap-2">
                       {item.features.map((feature, index) => (
                         <span
                           key={`${item._id}-feature-${index}`}
-                          className="rounded-full bg-blue-100 px-3 py-1 text-xs text-blue-800"
+                          className="rounded-full bg-blue-50 border border-blue-200 px-4 py-1.5 text-xs text-blue-800 font-medium"
                         >
                           {feature}
                         </span>
@@ -421,16 +443,18 @@ export default function AdminVerifyMachinesPage() {
                 ) : null}
 
                 {item.specs?.length ? (
-                  <div className="mt-5">
-                    <p className="text-sm font-semibold mb-2">Specifications</p>
-                    <div className="grid gap-2 md:grid-cols-2">
+                  <div className="mt-6">
+                    <p className="text-sm font-semibold text-ink-900 mb-3 flex items-center gap-2">
+                      <span>📊</span> Specifications
+                    </p>
+                    <div className="grid gap-3 md:grid-cols-2">
                       {item.specs.map((spec, index) => (
                         <div
                           key={`${item._id}-spec-${index}`}
-                          className="flex items-center justify-between rounded border bg-white px-3 py-2 text-sm"
+                          className="flex items-center justify-between rounded-xl border border-steel-200 bg-white px-4 py-3 text-sm shadow-sm"
                         >
-                          <span className="font-semibold text-gray-800">{spec.key}</span>
-                          <span className="text-gray-600">{spec.value}</span>
+                          <span className="font-semibold text-ink-800">{spec.key}</span>
+                          <span className="text-ink-600">{spec.value}</span>
                         </div>
                       ))}
                     </div>
@@ -438,46 +462,54 @@ export default function AdminVerifyMachinesPage() {
                 ) : null}
 
                 {item.rejectionReason ? (
-                  <div className="mt-4 rounded bg-red-50 p-3 text-sm text-red-700">
-                    <strong>Rejection reason:</strong> {item.rejectionReason}
+                  <div className="mt-6 rounded-xl bg-red-50 border-2 border-red-200 p-4 text-sm text-red-800">
+                    <p className="font-semibold flex items-center gap-2">
+                      <span>⚠️</span> Rejection reason:
+                    </p>
+                    <p className="mt-1">{item.rejectionReason}</p>
                   </div>
                 ) : null}
 
-                <div className="mt-6 border-t pt-4">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <h3 className="font-bold">Priority Messages (Admin ↔ Seller)</h3>
-                    <span className="text-xs text-gray-500">
-                      Ask for more info before approving. Seller replies will show here.
+                <div className="mt-8 border-t-2 border-steel-200 pt-6">
+                  <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+                    <h3 className="font-heading font-bold text-lg text-ink-950 flex items-center gap-2">
+                      <span>💬</span> Admin ↔ Seller Messages
+                    </h3>
+                    <span className="text-xs text-ink-600 bg-steel-100 px-3 py-1.5 rounded-full">
+                      Ask for more info before approving
                     </span>
                   </div>
 
                   {Array.isArray(item.messages) && item.messages.length > 0 ? (
-                    <div className="mt-3 max-h-72 overflow-y-auto space-y-3">
+                    <div className="mt-4 max-h-80 overflow-y-auto space-y-3 bg-steel-50 rounded-xl p-4 border border-steel-200">
                       {item.messages.map((msg, index) => (
                         <div
                           key={`${item._id}-msg-${index}`}
                           className={`flex ${msg.sender === "seller" ? "justify-start" : "justify-end"}`}
                         >
                           <div
-                            className={`max-w-[80%] rounded-lg px-4 py-2 text-sm ${
+                            className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm shadow-sm ${
                               msg.sender === "seller"
-                                ? "bg-gray-100 text-gray-900"
+                                ? "bg-white border border-steel-300 text-ink-900"
                                 : msg.priority
-                                  ? "bg-red-50 border border-red-200 text-red-900"
-                                  : "bg-blue-600 text-white"
+                                  ? "bg-red-50 border-2 border-red-300 text-red-900"
+                                  : "bg-copper-600 text-white"
                             }`}
                           >
-                            <p className="text-xs font-semibold opacity-80 mb-1">
-                              {msg.sender === "seller" ? "Seller" : msg.priority ? "Admin • Priority" : "Admin"}
+                            <p className="text-xs font-semibold opacity-80 mb-1.5">
+                              {msg.sender === "seller" ? "👤 Seller" : msg.priority ? "🔴 Admin • Priority" : "🛡️ Admin"}
                             </p>
-                            <p className="whitespace-pre-wrap">{msg.content}</p>
-                            <p className="text-[11px] opacity-70 mt-1">{formatDateTime(msg.createdAt)}</p>
+                            <p className="whitespace-pre-wrap leading-relaxed">{msg.content}</p>
+                            <p className="text-[11px] opacity-70 mt-2">{formatDateTime(msg.createdAt)}</p>
                           </div>
                         </div>
                       ))}
                     </div>
                   ) : (
-                    <p className="mt-3 text-sm text-gray-600">No admin/seller messages yet.</p>
+                    <div className="mt-4 rounded-xl border-2 border-dashed border-steel-300 bg-steel-50 p-8 text-center">
+                      <span className="text-3xl opacity-50">💭</span>
+                      <p className="text-sm text-ink-600 mt-2">No messages yet. Start a conversation with the seller.</p>
+                    </div>
                   )}
 
                   {item.status === "pending" ? (
@@ -486,7 +518,7 @@ export default function AdminVerifyMachinesPage() {
                         e.preventDefault();
                         sendQuestion(item._id);
                       }}
-                      className="mt-3"
+                      className="mt-4"
                     >
                       <textarea
                         value={questionDrafts[item._id] || ""}
@@ -495,27 +527,28 @@ export default function AdminVerifyMachinesPage() {
                         }
                         rows={3}
                         placeholder="Ask the seller for more specs, compliance docs, additional photos, service coverage, etc."
-                        className="w-full border rounded px-3 py-2 outline-none focus:border-blue-500 resize-none"
+                        className="w-full border-2 border-steel-300 rounded-xl px-4 py-3 outline-none focus:border-copper-500 focus:ring-2 focus:ring-copper-500/20 resize-none transition"
                       />
-                      <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
-                        <label className="flex items-center gap-2 text-xs font-semibold text-gray-700">
+                      <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
+                        <label className="flex items-center gap-2 text-sm font-semibold text-ink-800">
                           <input
                             type="checkbox"
                             checked={priorityDrafts[item._id] ?? true}
                             onChange={(e) =>
                               setPriorityDrafts((prev) => ({ ...prev, [item._id]: e.target.checked }))
                             }
+                            className="rounded border-steel-300 text-red-600 focus:ring-red-500"
                           />
-                          Send as priority
+                          ⚠️ Send as priority
                         </label>
                         <button
                           type="submit"
                           disabled={
                             sendingQuestionId === item._id || !String(questionDrafts[item._id] || "").trim()
                           }
-                          className="rounded bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:bg-gray-400"
+                          className="rounded-xl bg-copper-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-copper-700 disabled:bg-steel-400 transition shadow-soft"
                         >
-                          {sendingQuestionId === item._id ? "Sending..." : "Send Message"}
+                          {sendingQuestionId === item._id ? "Sending..." : "📤 Send Message"}
                         </button>
                       </div>
                     </form>
