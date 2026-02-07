@@ -28,7 +28,7 @@ export default function LoginForm({ role }) {
         method: "POST",
         body: JSON.stringify({ ...form, role })
       });
-      setAuthUser(payload.data);
+      setAuthUser(payload.data, payload.token);
       router.push(role === "supplier" ? "/portal/supplier" : "/portal/buyer");
     } catch (error) {
       setStatus({ loading: false, error: error.message });

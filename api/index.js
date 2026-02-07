@@ -115,7 +115,16 @@ function clearAuthCookie(res) {
 
 async function getUserFromRequest(req) {
   const cookies = parseCookies(req);
-  const token = cookies[SESSION_COOKIE];
+  let token = cookies[SESSION_COOKIE];
+  
+  // Fallback: check Authorization header for Safari/Apple devices
+  if (!token) {
+    const authHeader = req.headers.authorization;
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      token = authHeader.substring(7);
+    }
+  }
+  
   if (!token) return null;
 
   try {
@@ -290,7 +299,7 @@ app.post("/api/auth/register-buyer", async (req, res) => {
 
     const token = signToken(user);
     setAuthCookie(res, token);
-    res.status(201).json({ data: user });
+    res.status(201).json({ data: user, token });
   } catch (error) {
     res.status(500).json({ error: "Registration failed." });
   }
@@ -333,7 +342,7 @@ app.post("/api/auth/register-msme", async (req, res) => {
 
     const token = signToken(user);
     setAuthCookie(res, token);
-    res.status(201).json({ data: user });
+    res.status(201).json({ data: user, token });
   } catch (error) {
     res.status(500).json({ error: "Registration failed." });
   }
@@ -378,7 +387,7 @@ app.post("/api/auth/register-supplier", async (req, res) => {
 
     const token = signToken(user);
     setAuthCookie(res, token);
-    res.status(201).json({ data: user });
+    res.status(201).json({ data: user, token });
   } catch (error) {
     res.status(500).json({ error: "Registration failed." });
   }
@@ -411,7 +420,7 @@ app.post("/api/auth/login", async (req, res) => {
 
     const token = signToken(user);
     setAuthCookie(res, token);
-    res.json({ data: user });
+    res.json({ data: user, token });
   } catch (error) {
     res.status(500).json({ error: "Login failed." });
   }
@@ -422,7 +431,7 @@ app.get("/api/auth/me", async (req, res) => {
   if (!user) {
     return res.status(401).json({ error: "Unauthorized." });
   }
-  return res.json({ data: user });
+  return res.json({ data: user, token });
 });
 
 app.post("/api/auth/logout", (_req, res) => {

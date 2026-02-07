@@ -48,7 +48,7 @@ export default function MsmeRegistrationForm() {
         method: "POST",
         body: JSON.stringify(form)
       });
-      setAuthUser(payload.data);
+      setAuthUser(payload.data, payload.token);
       setStatus({ loading: false, error: "", success: "Registration complete. Redirecting..." });
       setForm(initialState);
       router.push("/portal/supplier");
