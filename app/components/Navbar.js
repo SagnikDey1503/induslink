@@ -96,18 +96,11 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 text-white">
-      <div className="absolute inset-0 bg-ink-950/60 backdrop-blur-xl border-b border-white/10" />
-      <div
-        className="pointer-events-none absolute inset-0 opacity-70"
-        style={{
-          background:
-            "linear-gradient(90deg, rgba(243,140,58,0.18), rgba(13,15,20,0) 28%, rgba(53,179,127,0.12) 72%, rgba(95,120,152,0.14))"
-        }}
-      />
+      <div className="absolute inset-0 bg-ink-950/30 backdrop-blur-md border-b border-white/10" />
 
       <div className="relative mx-auto flex w-full max-w-6xl items-center gap-4 px-4 py-3 sm:px-6">
         <Link href="/" className="flex items-center flex-shrink-0" aria-label="IndusLink home">
-          <Logo className="h-10" />
+          <Logo className="h-10" isDark={true} />
         </Link>
 
         {/* Desktop Navigation */}

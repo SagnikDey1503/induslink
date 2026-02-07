@@ -1,6 +1,6 @@
 "use client";
 
-export default function Logo({ className = "h-8", variant = "full" }) {
+export default function Logo({ className = "h-8", variant = "full", isDark = true }) {
   if (variant === "icon") {
     return (
       <svg className={className} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -20,7 +20,7 @@ export default function Logo({ className = "h-8", variant = "full" }) {
         <circle cx="20" cy="20" r="4" fill="white"/>
         <path d="M16 20H12M28 20H24M20 16V12M20 28V24" stroke="white" strokeWidth="2" strokeLinecap="round"/>
       </svg>
-      <span className="text-2xl font-bold text-gray-900 dark:text-white">
+      <span className={`text-2xl font-bold ${isDark ? "text-white" : "text-gray-900"}`}>
         Indus<span className="text-amber-600">Link</span>
       </span>
     </div>
