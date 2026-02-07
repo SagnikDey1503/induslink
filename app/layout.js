@@ -18,7 +18,10 @@ const body = Work_Sans({
 
 export const metadata = {
   title: "IndusLink | MSME Manufacturing Intelligence",
-  description: "Structured machine discovery and decision support for Indian MSMEs."
+  description: "Structured machine discovery and decision support for Indian MSMEs.",
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({ children }) {

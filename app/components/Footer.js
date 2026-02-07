@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Logo from "./Logo";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -8,20 +9,7 @@ export default function Footer() {
       <div className="mx-auto w-full max-w-6xl px-6 py-12">
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
-            <div className="flex items-center gap-3">
-              <img
-                src="/induslink-mark.svg"
-                alt="IndusLink"
-                className="h-10 w-10"
-                width={40}
-                height={40}
-                loading="lazy"
-              />
-              <div>
-                <p className="font-heading text-lg text-white leading-tight">IndusLink</p>
-                <p className="text-xs text-steel-400">MSME Manufacturing Intelligence</p>
-              </div>
-            </div>
+            <Logo className="h-10" />
 
             <p className="mt-4 text-sm text-steel-300 leading-relaxed">
               Structured discovery for manufacturing MSMEs across India. Compare verified machines, connect with

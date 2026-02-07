@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Logo from "./Logo";
 
 export default function GlobalLoader() {
   const [loading, setLoading] = useState(true);
@@ -28,11 +29,9 @@ export default function GlobalLoader() {
               initial={{ scale: 0.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="mb-8"
+              className="mb-8 flex justify-center"
             >
-              <div className="h-20 w-20 mx-auto rounded-2xl bg-copper-500 text-ink-950 grid place-items-center font-heading text-4xl font-bold">
-                IL
-              </div>
+              <Logo className="h-16" />
             </motion.div>
             
             <motion.div

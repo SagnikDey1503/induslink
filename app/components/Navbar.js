@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { apiFetch } from "../../lib/api";
 import { clearAuthUser, getAuthUser } from "../../lib/auth";
+import Logo from "./Logo";
 
 export default function Navbar() {
   const router = useRouter();
@@ -105,19 +106,8 @@ export default function Navbar() {
       />
 
       <div className="relative mx-auto flex w-full max-w-6xl items-center gap-4 px-4 py-3 sm:px-6">
-        <Link href="/" className="flex items-center gap-3 flex-shrink-0" aria-label="IndusLink home">
-          <img
-            src="/induslink-mark.svg"
-            alt="IndusLink"
-            className="h-10 w-10"
-            width={40}
-            height={40}
-            loading="eager"
-          />
-          <div className="hidden sm:block">
-            <p className="font-heading text-lg leading-tight">IndusLink</p>
-            <p className="text-xs text-steel-300">MSME Manufacturing Intelligence</p>
-          </div>
+        <Link href="/" className="flex items-center flex-shrink-0" aria-label="IndusLink home">
+          <Logo className="h-10" />
         </Link>
 
         {/* Desktop Navigation */}
