@@ -103,6 +103,7 @@ export default async function Home() {
               eyebrow="How it works"
               title="A clear pathway from need to machine"
               description="Define your process requirements, compare verified machines, and connect with trusted suppliers."
+              theme="dark"
             />
           </div>
           <div className="grid gap-4">

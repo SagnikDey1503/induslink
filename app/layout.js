@@ -2,6 +2,7 @@ import "./globals.css";
 import { Space_Grotesk, Work_Sans } from "next/font/google";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import GlobalLoader from "./components/GlobalLoader";
 
 const heading = Space_Grotesk({
   subsets: ["latin"],
@@ -24,6 +25,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${heading.variable} ${body.variable}`}>
       <body className="min-h-screen bg-steel-100 text-ink-900 flex flex-col">
+        <GlobalLoader />
         <Navbar />
         <main className="pt-16 flex-1">
           {children}
